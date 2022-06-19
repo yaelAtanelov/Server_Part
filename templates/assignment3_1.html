@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+    {% set title='about me' %}
+    {% block title %}{{ title | capitalize() | title }} Page{% endblock %}
+
+{% block content %}
+    <h1>A little about me :)</h1>
+
+ {% if my_songs %}
+    <p>My name is {{ my_name | default('anonymous', true) | capitalize() }} and I am {{ my_age | abs | round }} years old,
+        I started in the jewelry business from the age of 5,
+        I think the field requires a lot of creativity and an open mind.
+        I think there is nothing that opens my head more than songs.
+        That's why I want to share here the ultimate song list for jewelry making, enjoy!</p>
+
+
+        <h2>THE BEST SONGS EVER:</h2>
+        <ol>
+            {% for song in my_songs %}
+                <li>
+                    <h3>{{ song | capitalize() | replace("Fuck", "***") }}</h3>
+                </li>
+            {% endfor %}
+        </ol>
+
+    {% else %}
+        <h3>Sorry! I'm still working on it. Come back to the page later, in the meantime enjoy a picture of a cute dog with a crown :)</h3>
+       {% include('dog_photo.html') %}
+     <form action="/previous_songs">
+     <h4>By clicking on this button you can see the previous about page</h4>
+     <input type="submit" value="to the previous about page">
+
+     </form>
+
+    {% endif %}
+   <br>
+{{ super() }}
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+    {% set title='assignment3_2' %}
+    {% block title %}{{ title }} Page{% endblock %}
+
+{% block content %}
+    {% if session['logedin'] %}
+        <div class="grid-item grid-item-1">
+            <header>Welcome, {{ session['username'] | capitalize() }}</header>
+        </div>
+
+    {% endif %}
+<h2>what your looking for?</h2>
+
+    <form action="/RegisterCatalog" method="get">
+    <h3>To know more about a specific user, search for him here:</h3>
+        <input type="text" name="user_id" placeholder="User ID" >
+        <input type="email" name="user_email" placeholder="Email" >
+        <input type="submit" value="Find this User!">
+    </form>
+
+    {% if user_num %}
+        <h1>{{ user_num }}:</h1>
+        <h3 style="color: #097ef5">{{ user_name }} {{ last_name }}</h3>
+        <h3>Favorite song- {{ user_song }}</h3>
+        <h3> Email- {{ user_email }} </h3>
+    {% endif %}
+
+
+    {% if message %}
+        <h3>{{ message }}</h3>
+        <h4>in the meantime enjoy a picture of a cute dog with a crown :)</h4>
+        {% include('dog_photo.html') %}
+    {% endif %}
+
+    {% if users_catalog %}
+        <h3> All users in the system:</h3>
+        <fieldset STYLE="padding: 2vw ">
+            {% for key, val in users_catalog.items() %}
+                <h3>{{ key }}</h3>
+                {% for k, v in val.items() %}
+                    {% if k != 'password' %}
+                        <h4 style="color: cornflowerblue">{{ k }} : {{ v }}</h4>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </fieldset>
+    {% endif %}
+
+
+    {% if session['logedin'] %}
+        <h1>Congratulations! You were able to register for the system!</h1>
+    {% else %}
+        <h2>Not registered yet? you can do it now!</h2>
+        {% if registration_message %}
+            <h3>{{ registration_message }} </h3>
+         {% endif %}
+            <form action="/RegisterCatalog" method="post">
+                <input style="margin:1vw" type="text" name="first_name" placeholder="User's Name" required><br>
+                <input style="margin:1vw" type="text" name="last_name" placeholder="Last Name" required><br>
+                <input style="margin:1vw" type="email" name="Email" placeholder="Email" required><br>
+                <input style="margin:1vw" type="text" name="ID" placeholder="User's ID" required><br>
+                <input style="margin:1vw" type="text" name="Fav_Song" placeholder="What is your favorite song?" required><br>
+                <input style="margin:1vw" type="password" name="password" placeholder="password" required><br>
+                <input style="margin:1vw" type="submit" value="submit">
+             </form>
+    {% endif %}
+
+
+
+{% endblock %}

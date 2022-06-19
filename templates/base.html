@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+
+    {% include('styles.html') %}
+</head>
+<body>
+
+
+    {% include('header.html') %}
+
+<div style="margin: 10vh">
+
+    {% block content %}
+            <h6>Thank you for using the site, you can also search for us on Facebook and YouTube</h6>
+    {% endblock %}
+
+</div>
+{% include('footer.html') %}
+</body>
+</html>

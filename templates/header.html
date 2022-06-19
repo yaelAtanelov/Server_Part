@@ -1,0 +1,22 @@
+
+    <div class="navbar">
+        <img src="{{ url_for('static',filename='logo.jpeg') }}" class="logo bigger">
+        <nav>
+        {% if session['logedin'] %}
+        <h1 style="color: hotpink" >Hello {{ session['username'] | default('anonymous', true) | capitalize() }}, Nice to see you back!</h1>
+        {% endif %}
+            <ul>
+                <li><a href="{{ url_for('biginner') }}">home page</a></li>
+                <li><a href="{{ url_for('ContactMe') }}">Contact Me :)</a></li>
+                 <li><a href="{{ url_for('assignment3_1Rout') }}">assignment3_1</a></li>
+                <li><a href="{{ url_for('assignment3_2') }}">assignment3_2</a></li>
+                {% if session['logedin'] %}
+                     <li><a href="{{ url_for('logout_func') }}">Log Out!</a> </li>
+                {% endif %}
+
+
+            </ul>
+        </nav>
+        <img src="{{ url_for('static',filename='menu-burger.png') }}" class="menu bigger">
+    </div>
+
