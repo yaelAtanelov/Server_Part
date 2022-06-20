@@ -58,7 +58,12 @@ def assignment3_2():
         user_email = request.args['user_email']
         if not user_id:
             return render_template('assignment3_2.html',
-                                   users_catalog=users_catalog)
+                                   users_catalog=users_catalog,
+                                   message='Please fill in all the fields ')
+        if not user_email:
+            return render_template('assignment3_2.html',
+                                   users_catalog=users_catalog,
+                                   message='Please fill in all the fields ')
         for key in users_catalog:
             if user_id.__eq__(users_catalog[key]['id']):
                 if user_email.__eq__(users_catalog[key]['email']):
